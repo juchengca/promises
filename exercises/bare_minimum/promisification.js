@@ -58,6 +58,18 @@ var readFileAndMakeItFunny = function(filePath, callback) {
   });
 };
 
+var writeAPI = function(filePath, data, callback) {
+  fs.writeFile(filePath, data, (err) => {
+    if (err) {
+      throw ('error writing data');
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+var writeAPIAsync = Promise.promisify(writeAPI);
+
 var readFileAndMakeItFunnyAsync = Promise.promisify(readFileAndMakeItFunny); // TODO
 
 // Export these functions so we can test them and reuse them in later exercises
